@@ -1,3 +1,54 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:0d2ad756c1bec23dd18b2bdab5a84642ba03732a72bd2937da5e7f7edeb49e4a
-size 2424
+# Copyright (C) 2018 Sergiu Deitsch
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice, this
+#    list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its contributors
+#    may be used to endorse or promote products derived from this software without
+#    specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+import numpy as np
+import os
+import cv2
+
+def load_dataset(fname=None):
+    if fname is None:
+        # Assume we are in the utils folder and get the absolute path to the
+        # parent directory.
+        fname = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                             os.path.pardir))
+        fname = os.path.join(fname, 'labels.csv')
+
+    data = np.genfromtxt(fname, dtype=['|S19', '<f8', '|S4'], names=[
+                         'path', 'probability', 'type'])
+    image_fnames = np.char.decode(data['path'])
+    probs = data['probability']
+    types = np.char.decode(data['type'])
+
+    def load_cell_image(fname):
+        return cv2.resize(cv2.imread(fname),(224,224)) 
+
+    dir = os.path.dirname(fname)
+
+    images = np.array([load_cell_image(os.path.join(dir, fn))
+                       for fn in image_fnames])
+
+    return images, probs, types
