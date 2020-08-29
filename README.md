@@ -1,11 +1,19 @@
 ## Modificacion ITM
 
+### configurar project
+```sh
 git lfs pull
 
 pip install -r requirement.txt
-
+```
+### train model
+```sh
+python t_eletro_view.py
+```
+### run model
+```sh
 python electro_view.py
-
+```
 # A Benchmark for Visual Identification of Defective Solar Cells in Electroluminescence Imagery
 
 This repository provides a dataset of solar cell images extracted from
