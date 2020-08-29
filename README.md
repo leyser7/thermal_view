@@ -1,3 +1,9 @@
+## Modificacion ITM
+
+git lfs pull
+pip install -r requirement.txt
+python electro_view.py
+
 # A Benchmark for Visual Identification of Defective Solar Cells in Electroluminescence Imagery
 
 This repository provides a dataset of solar cell images extracted from
@@ -98,10 +104,3 @@ BibTeX details:
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
 For commercial use, please contact us for further information.
-
-
-## Modificacion ITM
-
-git lfs pull
-pip install -r requirement.txt
-python electro_view.py
