@@ -102,5 +102,6 @@ For commercial use, please contact us for further information.
 
 ## Modificacion ITM
 
+git lfs pull
 pip install -r requirement.txt
 python electro_view.py
