@@ -1,7 +1,9 @@
 ## Modificacion ITM
 
 git lfs pull
+
 pip install -r requirement.txt
+
 python electro_view.py
 
 # A Benchmark for Visual Identification of Defective Solar Cells in Electroluminescence Imagery
